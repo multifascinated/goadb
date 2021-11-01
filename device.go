@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
@@ -249,7 +250,8 @@ func prepareCommandLine(cmd string, args ...string) (string, error) {
 	}
 
 	for i, arg := range args {
-		if strings.ContainsRune(arg, '"') {
+		re := regexp.MustCompile("[^\\\\]\"")
+		if re.FindAllString(arg, -1) != nil {
 			return "", errors.Errorf(errors.ParseError, "arg at index %d contains an invalid double quote: %s", i, arg)
 		}
 		if containsWhitespace(arg) {

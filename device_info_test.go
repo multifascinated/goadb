@@ -38,7 +38,7 @@ func TestParseDeviceLongUnauthorized(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, &DeviceInfo{
 		Serial: "SERIAL",
-		Usb: "1234"}, dev)
+		Usb:    "1234"}, dev)
 }
 
 func TestParseDeviceLongUsb(t *testing.T) {
